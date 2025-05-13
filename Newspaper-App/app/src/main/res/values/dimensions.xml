@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bar_height">64dp</dimen>
+    <dimen name="navigation_bar_height">64dp</dimen>
+
+    <dimen name="item_blog_height">420dp</dimen>
+    <dimen name="margin_bottom_bar">45dp</dimen>
+</resources>

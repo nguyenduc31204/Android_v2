@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#212121"
+    app:cardCornerRadius="6dp">
+
+    <com.realgear.readable_bottom_bar.ReadableBottomBar
+        android:id="@+id/root_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bar_height"
+        android:background="#353535"
+        android:clickable="true"
+        app:rbb_selectedTabType="text"
+        app:rbb_indicatorAppearance="round"
+        app:rbb_indicatorStyle="normal"
+        app:rbb_indicatorMargin="40dp"
+        app:rbb_indicatorHeight="4dp"
+        app:rbb_tabs="@menu/navigation_bar_tab"
+        app:rbb_selectedIndex="0"
+        app:rbb_tabColor="#FDF9F9"
+        app:rbb_indicatorColor="#00B366"
+        app:rbb_tabColorSelected="#00B366"
+        app:rbb_textStyle="bold"
+        app:rbb_textSize="16sp"
+        app:rbb_iconSize="30dp"
+        android:paddingBottom="20dp"
+        />
+</FrameLayout>

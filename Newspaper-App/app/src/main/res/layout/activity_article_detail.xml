@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="40dp"
+    tools:context=".ArticleDetailActivity"
+    android:background="#212121">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="54dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="-10dp"
+                android:paddingHorizontal="15dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phap luat"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Viện KSND Tối cao nhận định về vụ tai nạn dẫn đến nổ súng ở Vĩnh Long"
+                    android:textColor="@color/white"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bao Chau"
+                            android:textColor="@color/white"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Thu Bay 03/05/2025, 16:30"
+                            android:textColor="#B6B6B6"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/dashed_border"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BAN TOM TAT NOI DUNG"
+                    android:textColor="#C5C5C5"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trong khi đó, thị trường hàng không nội địa cũng ghi nhận mức tăng trưởng đột biến. Các chuyến bay đến TP Hồ Chí Minh trong khoảng thời gian từ 29/4 đến 4/5 gần như kín chỗ. Ngày 30/4, tỷ lệ lấp đầy ghế trên các đường bay từ Hà Nội, Đà Nẵng, Hải Phòng vào TP Hồ Chí Minh vượt 95%. Một số hãng đã tăng chuyến trong khung giờ đêm và sáng sớm để đáp ứng nhu cầu. Cùng với đó, tình trạng “cháy vé” cũng lan sang các tuyến tàu lửa, xe khách đường dài, cho thấy sức hút mạnh mẽ của TP Hồ Chí Minh dịp lễ trọng đại kỷ niệm 50 năm Ngày Giải phóng miền Nam, thống nhất đất nước."
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="18dp"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:text="Ngày 3-5, Cục An toàn thực phẩm (Bộ Y tế) cho biết, đã có công văn đề nghị Bộ Công Thương, Bộ Văn hóa Thể thao và Du lịch phối hợp rà soát, xử lý thực phẩm bảo vệ sức khoẻ vi phạm đang được kinh doanh, quảng cáo trên môi trường mạng. Đây là thông tin được đăng tải trên trang web của cơ quan này.
+
+Theo Cục An toàn thực phẩm, cơ quan chức năng phát hiện trên một số sàn giao dịch thương mại điện tử, website, mạng xã hội đang kinh doanh, quảng cáo hai sản phẩm thực phẩm bảo vệ sức khỏe gồm Dáng xuân Phục linh Gold và Best Slim Collagen.
+
+Đối với hai sản phẩm này, ngày 29-4, Cục An toàn thực phẩm đã có công văn đề nghị 63 tỉnh, thành phố giám sát, thu hồi hai loại sản phẩm do có chứa chất cấm sibutramine (chất gây ức chế cảm giác thèm ăn, bị cấm sử dụng trên người vì có nhiều tác dụng phụ nguy hiểm).
+
+Trong đó, sản phẩm Dáng xuân Phục linh Gold chưa được công bố, số giấy tiếp nhận đăng ký bản công bố ghi trên bao bì không đúng. Sản phẩm Best Slim Collagen do Công ty TNHH thiết bị y tế Hoa Anh Đào công bố, đã được cấp giấy tiếp nhận đăng ký bản công bố năm 2019. Tuy nhiên, công ty này báo cáo không nhập khẩu lô sản phẩm Best Slim Collagen số 29L367, hạn sử dụng 1-2027. Đây là số lô sản phẩm được Cục An toàn thực phẩm xác định là có vi phạm.
+
+Cục An toàn thực phẩm đề nghị Cục Thương mại điện tử và kinh tế số, Cục Quản lý và phát triển thị trường trong nước, Cục Phát thanh - truyền hình và thông tin điện tử phối hợp trong công tác quản lý các sản phẩm vi phạm về an toàn thực phẩm.
+
+Cục Thương mại điện tử và kinh tế số tháo gỡ nội dung quảng cáo các sản phẩm trên tại các sàn giao dịch thương mại điện tử, ứng dụng thương mại điện tử; tăng cường quản lý sàn thương mại điện tử, không để các sản phẩm giả, đã bị thu hồi được tiếp tục được bán.
+
+Cục Phát thanh - truyền hình và thông tin điện tử tháo gỡ nội dung quảng cáo các sản phẩm trên tại các website đồng thời yêu cầu Facebook, Youtube xem xét, tháo gỡ, đóng các quảng cáo sản phẩm vi phạm nêu trên.
+
+Cục Quản lý và phát triển thị trường trong nước tăng cường công tác quản lý thị trường; kiểm soát việc lưu hành các sản phẩm vi phạm nêu trên, kịp thời xử lý hành vi kinh doanh hàng hoá nhập lậu; sản xuất, buôn bán hàng giả, hàng cấm, hàng hóa không rõ nguồn gốc." />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="#B8B4B4"
+                android:text="Bạn thấy bài viết này như thế nào?" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_rounded"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="5dp"
+                            app:srcCompat="@drawable/ic_like" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white"
+                            android:text="15" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="Yêu thích" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_rounded"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="5dp"
+                            app:srcCompat="@drawable/ic_creative" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white"
+                            android:text="15"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="Sáng tạo" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_rounded"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="5dp"
+                            app:srcCompat="@drawable/ic_unique" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white"
+                            android:text="15" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="Độc đáo" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_rounded"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="5dp"
+                            app:srcCompat="@drawable/ic_favorite" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white"
+                            android:text="15" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="Cảm động" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#01B484"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/left_border"
+                android:text="TIN LIÊN QUAN"/>
+
+            <!--        <androidx.recyclerview.widget.RecyclerView-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"/>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#01B484"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/left_border"
+                android:text="BÌNH LUẬN (0)"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/text_box_border"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:orientation="horizontal"
+        android:background="#434242"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        android:gravity="center"
+        android:padding="10dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="15dp">
+
+
+        <ImageView
+            android:id="@+id/back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_comment"
+                android:paddingRight="10dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_bookmark"
+                android:paddingRight="10dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_share" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
