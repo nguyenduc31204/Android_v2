@@ -15,6 +15,15 @@
         android:theme="@style/Theme.Newspaper"
         tools:targetApi="31">
         <activity
+            android:name=".AddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageUsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewsPointActivity"
             android:exported="false" />
         <activity

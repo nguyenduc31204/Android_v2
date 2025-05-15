@@ -2,6 +2,7 @@ package com.example.newspaper.database.repositories;
 
 import android.app.Application;
 import android.util.Patterns;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
@@ -10,6 +11,7 @@ import com.example.newspaper.database.dao.UserDao;
 import com.example.newspaper.models.User;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -196,4 +198,93 @@ public class UserRepository {
         void onSuccess();
         void onError(String errorMessage);
     }
+
+    public interface DeleteCallback {
+        void onSuccess();
+        void onError(String errorMessage);
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+//    public LiveData<User> getUserByIdMana(int userId) {
+//        return userDao.getUserById(userId);
+//    }
+
+    public void insertUser(User user, InsertCallback callback) {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    userDao.insert(user);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (success) {
+                    callback.onSuccess();
+                } else {
+                    callback.onError("Lỗi khi thêm người dùng");
+                }
+            }
+        }.execute();
+    }
+
+//    public void updateUserMana(User user, UpdateCallback callback) {
+//        new AsyncTask<Void, Void, Boolean>() {
+//            @Override
+//            protected Boolean doInBackground(Void... voids) {
+//                try {
+//                    userDao.update(user);
+//                    return true;
+//                } catch (Exception e) {
+//                    return false;
+//                }
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Boolean success) {
+//                if (success) {
+//                    callback.onSuccess();
+//                } else {
+//                    callback.onError("Lỗi khi cập nhật người dùng");
+//                }
+//            }
+//        }.execute();
+//    }
+
+    public void deleteUser(User user, DeleteCallback callback) {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    userDao.delete(user);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (success) {
+                    callback.onSuccess();
+                } else {
+                    callback.onError("Lỗi khi xóa người dùng");
+                }
+            }
+        }.execute();
+    }
+
+    public interface InsertCallback {
+        void onSuccess();
+        void onError(String errorMessage);
+    }
+
+
 }

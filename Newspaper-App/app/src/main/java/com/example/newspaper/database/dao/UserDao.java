@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Delete;
 import androidx.room.Update;
 
 import com.example.newspaper.models.User;
 
 import java.sql.Date;
+import java.util.List;
 
 @Dao
 public interface UserDao {
@@ -35,6 +37,11 @@ public interface UserDao {
             "WHERE id = :userId")
     void updateUserProfile(int userId, String fullName, String phone, Date dob,
                            Boolean isMale, String city, String avatarUrl, Date updatedAt);
+    @Delete
+    void delete(User user);
+
+    @Query("SELECT * FROM user_table")
+    LiveData<List<User>> getAllUsers();
 
     @Query("SELECT COUNT(*) > 0 FROM user_table WHERE email = :email")
     LiveData<Boolean> checkEmailExistsLive(String email);

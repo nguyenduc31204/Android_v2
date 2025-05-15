@@ -59,11 +59,11 @@ public abstract class DatabaseHandler extends RoomDatabase {
                 DatabaseHandler database = getInstance(null);
 
 //                // Thêm admin user mẫu
-//                User admin = new User(username, email, hashedPassword);
-//                admin.setEmail("admin@newspaper.com");
-//                admin.setPasswordHash("abc123!@#");
-//                admin.setRole("admin");
-//                database.userDao().insert(admin);
+                User admin = new User();
+                admin.setEmail("admin@1.1");
+                admin.setPasswordHash("abc123");
+                admin.setRole("admin");
+                database.userDao().insert(admin);
             }).start();
         };
     };

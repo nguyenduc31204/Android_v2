@@ -47,10 +47,17 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(User user) {
                     runOnUiThread(() -> {
-                        // Lưu thông tin đăng nhập và chuyển đến màn hình chính
+                        // Lưu thông tin đăng nhập
                         saveLoginInfo(user);
+
                         Toast.makeText(LoginActivity.this, user.getUsername() + " đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                        if ("admin".equalsIgnoreCase(user.getRole())) {
+                            startActivity(new Intent(LoginActivity.this, ManageUsersActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+
                         finish();
                     });
                 }
@@ -63,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         });
+
     }
 
     private void saveLoginInfo(User user) {

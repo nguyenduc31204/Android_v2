@@ -2,35 +2,33 @@ package com.example.newspaper;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.newspaper.database.repositories.UserRepository;
 import com.example.newspaper.models.User;
-import com.example.newspaper.ui.adapters.view_models.UserViewModel;
-import com.example.newspaper.ui.fragments.FragmentHome;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class UpdateInforActivity extends AppCompatActivity {
+public class UserDetailActivity extends AppCompatActivity {
+
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private ImageView imgAvatar;
@@ -42,32 +40,29 @@ public class UpdateInforActivity extends AppCompatActivity {
     private int currentUserId;
     private User currentUser;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        userRepository = new UserRepository(getApplication());
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_infor);
 
+        userRepository = new UserRepository(getApplication());
         initViews();
 
-        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        // Lấy USER_ID từ Intent
+        currentUserId = (int) getIntent().getLongExtra("USER_ID", -1);
 
-        // Lấy ID người dùng hiện tại
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        currentUserId = (int)prefs.getLong("userId", -1);
-        Log.d("UserIdDebug", "USER_ID from Intent: " + currentUserId);
+        Log.d("UpdateInforActivity", "Received USER_ID: " + currentUserId);
+
         if (currentUserId == -1) {
             Toast.makeText(this, "Lỗi: Không xác định người dùng", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-        loadUserInfo();
 
+        loadUserInfo();
         setupEvents();
     }
+
     private void initViews() {
         imgAvatar = findViewById(R.id.imgAvatar);
         btnAddPhoto = findViewById(R.id.btnAddPhoto);
@@ -79,71 +74,38 @@ public class UpdateInforActivity extends AppCompatActivity {
         etAddress = findViewById(R.id.etAddress);
         btnUpdate = findViewById(R.id.btnUpdate);
 
-
-
-        // Nút back
         findViewById(R.id.backBtn).setOnClickListener(v -> finish());
     }
 
-    private int getCurrentUserId() {
-        return getIntent().getIntExtra("USER_ID", -1);
-    }
-
-    private int getCurrentUserIdFromPrefs() {
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        return prefs.getInt("USER_ID", -1);
-    }
-
-
     private void loadUserInfo() {
-        if (currentUserId == -1) {
-            Toast.makeText(this, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
-
         userRepository.getUserById(currentUserId).observe(this, user -> {
             if (user != null) {
                 currentUser = user;
                 displayUserInfo(user);
+            } else {
+                Toast.makeText(this, "Không tìm thấy người dùng", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
 
     private void displayUserInfo(User user) {
-        edName.setText(user.getUsername());
-        etEmail.setText(user.getEmail());
+        edName.setText(user.getUsername() != null ? user.getUsername() : "");
+        etEmail.setText(user.getEmail() != null ? user.getEmail() : "");
         if (user.getDob() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            String formattedDate = sdf.format(user.getDob());
-            etBirthday.setText(formattedDate);
+            etBirthday.setText(sdf.format(user.getDob()));
         } else {
             etBirthday.setText("");
         }
-
-        Boolean isMale = user.getMale();
-        if (isMale != null) {
-            etGender.setText(isMale ? "Nam" : "Nữ");
-        } else {
-            etGender.setText("");
-        }
-
-        etPhone.setText(user.getPhone());
-        etAddress.setText(user.getCity());
-
-//        if (user.getAvatarUrl() != null && !user.getAvatarUrl().isEmpty()) {
-//            ImageUtils.loadImage(this, user.getAvatarUrl(), imgAvatar);
-//        }
+        etGender.setText(user.getMale() != null ? (user.getMale() ? "Nam" : "Nữ") : "Khác");
+        etPhone.setText(user.getPhone() != null ? user.getPhone() : "");
+        etAddress.setText(user.getCity() != null ? user.getCity() : "");
     }
 
     private void setupEvents() {
-        // Chọn ảnh đại diện
         btnAddPhoto.setOnClickListener(v -> openImageChooser());
-
-        // Date picker cho ngày sinh
         etBirthday.setOnClickListener(v -> showDatePickerDialog());
-
-        // Cập nhật thông tin
         btnUpdate.setOnClickListener(v -> updateUserInfo());
     }
 
@@ -178,51 +140,61 @@ public class UpdateInforActivity extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
-        // Validate dữ liệu
         if (!validateInput()) {
             return;
         }
 
-        User updatedUser = new User();
-        updatedUser.setPasswordHash(currentUser.getPasswordHash());
+        if (currentUser == null) {
+            Toast.makeText(this, "Lỗi: Không tải được thông tin người dùng", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        User updatedUser = new User();
         updatedUser.setId(currentUserId);
         updatedUser.setUsername(edName.getText().toString().trim());
         updatedUser.setEmail(etEmail.getText().toString().trim());
+        updatedUser.setPasswordHash(currentUser.getPasswordHash()); // Giữ nguyên mật khẩu
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String birthdayStr = etBirthday.getText().toString().trim();
-            Date dob = sdf.parse(birthdayStr);
-            updatedUser.setDob(dob);
+            if (!birthdayStr.isEmpty()) {
+                Date dob = sdf.parse(birthdayStr);
+                updatedUser.setDob(dob);
+            } else {
+                updatedUser.setDob(null);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(this, "Ngày sinh không hợp lệ", Toast.LENGTH_SHORT).show();
             return;
         }
-        updatedUser.setMale(etGender.getText().toString().equalsIgnoreCase("Nam"));
+
+        String genderStr = etGender.getText().toString().trim();
+        if (genderStr.equalsIgnoreCase("Nam")) {
+            updatedUser.setMale(true);
+        } else if (genderStr.equalsIgnoreCase("Nữ")) {
+            updatedUser.setMale(false);
+        } else {
+            updatedUser.setMale(null);
+        }
 
         updatedUser.setPhone(etPhone.getText().toString().trim());
         updatedUser.setCity(etAddress.getText().toString().trim());
-
-//        if (selectedImageUri != null) {
-//            String imagePath = ImageUtils.saveImageToInternalStorage(this, selectedImageUri);
-//            updatedUser.setAvatarUri(imagePath);
-//        }
 
         userRepository.updateUser(updatedUser, new UserRepository.UpdateCallback() {
             @Override
             public void onSuccess() {
                 runOnUiThread(() -> {
-                    Toast.makeText(UpdateInforActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserDetailActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                     setResult(RESULT_OK);
-//                    finish();
+                    finish();
                 });
             }
 
             @Override
             public void onError(String errorMessage) {
                 runOnUiThread(() -> {
-                    Toast.makeText(UpdateInforActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserDetailActivity.this, "Lỗi: " + errorMessage, Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -233,22 +205,18 @@ public class UpdateInforActivity extends AppCompatActivity {
             edName.setError("Vui lòng nhập họ tên");
             return false;
         }
-
-        else if (etEmail.getText().toString().trim().isEmpty()) {
+        if (etEmail.getText().toString().trim().isEmpty()) {
             etEmail.setError("Vui lòng nhập email");
             return false;
         }
-
-        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString().trim()).matches()) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString().trim()).matches()) {
             etEmail.setError("Email không hợp lệ");
             return false;
         }
-
-        else if (etPhone.getText().toString().trim().length() < 10) {
+        if (etPhone.getText().toString().trim().length() < 10) {
             etPhone.setError("Số điện thoại không hợp lệ");
             return false;
         }
-
         return true;
     }
 }
