@@ -235,28 +235,6 @@ public class UserRepository {
         }.execute();
     }
 
-//    public void updateUserMana(User user, UpdateCallback callback) {
-//        new AsyncTask<Void, Void, Boolean>() {
-//            @Override
-//            protected Boolean doInBackground(Void... voids) {
-//                try {
-//                    userDao.update(user);
-//                    return true;
-//                } catch (Exception e) {
-//                    return false;
-//                }
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Boolean success) {
-//                if (success) {
-//                    callback.onSuccess();
-//                } else {
-//                    callback.onError("Lỗi khi cập nhật người dùng");
-//                }
-//            }
-//        }.execute();
-//    }
 
     public void deleteUser(User user, DeleteCallback callback) {
         new AsyncTask<Void, Void, Boolean>() {

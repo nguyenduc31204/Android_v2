@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
             String email = ((EditText)findViewById(R.id.etAddress)).getText().toString();
             String password = ((EditText)findViewById(R.id.etDate)).getText().toString();
 
-            User newUser = new User(username, email, password);
+            User newUser = new User(username, email, password, "user");
 
             userRepository.registerUser(newUser, new UserRepository.RegistrationCallback() {
                 @Override

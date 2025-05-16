@@ -153,7 +153,10 @@ public class UserDetailActivity extends AppCompatActivity {
         updatedUser.setId(currentUserId);
         updatedUser.setUsername(edName.getText().toString().trim());
         updatedUser.setEmail(etEmail.getText().toString().trim());
-        updatedUser.setPasswordHash(currentUser.getPasswordHash()); // Giữ nguyên mật khẩu
+        // Giữ nguyên mật khẩu
+        updatedUser.setPasswordHash(currentUser.getPasswordHash());
+        updatedUser.setRole(currentUser.getRole());
+
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());

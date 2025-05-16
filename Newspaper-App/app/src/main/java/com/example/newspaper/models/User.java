@@ -131,10 +131,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
     @Ignore
-    public User(String username, String email, String passwordHash) {
+    public User(String username, String email, String passwordHash, String Role) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.role = Role;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }

@@ -53,7 +53,8 @@ public class AddUserActivity extends AppCompatActivity {
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setEmail(email);
-        newUser.setPasswordHash(password); // Note: In production, hash the password
+        newUser.setPasswordHash(password);
+        newUser.setRole("user");
 
         userRepository.insertUser(newUser, new UserRepository.InsertCallback() {
             @Override

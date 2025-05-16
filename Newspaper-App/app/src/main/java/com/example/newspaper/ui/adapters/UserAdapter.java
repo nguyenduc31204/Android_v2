@@ -27,9 +27,11 @@ public class UserAdapter extends ArrayAdapter<User> {
 
         TextView tvUsername = convertView.findViewById(R.id.tvUsername);
         TextView tvEmail = convertView.findViewById(R.id.tvEmail);
+        TextView tvRole = convertView.findViewById(R.id.tvRole);
 
         tvUsername.setText(user.getUsername());
         tvEmail.setText(user.getEmail());
+        tvRole.setText(user.getRole());
 
         return convertView;
     }
