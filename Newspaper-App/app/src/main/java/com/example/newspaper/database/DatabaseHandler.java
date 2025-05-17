@@ -7,6 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.newspaper.database.dao.ArticleDao;
@@ -29,7 +30,7 @@ import java.util.concurrent.Executors;
                 Article.class, Comment.class, Emotion.class, Notification.class, ReadHistory.class,
                 SearchHistory.class, User.class, Category.class
         },
-        version = 1
+        version = 3
 )
 @TypeConverters(Converters.class)
 public abstract class DatabaseHandler extends RoomDatabase {
@@ -43,11 +44,19 @@ public abstract class DatabaseHandler extends RoomDatabase {
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(), DatabaseHandler.class, "news_paper_app_db")
                     .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_2_3)
                     .addCallback(roomCallBack)
                     .build();
         }
 
         return instance;
+    };
+
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE users ADD COLUMN avatarUri TEXT");
+        }
     };
 
     public static RoomDatabase.Callback roomCallBack = new Callback(){
@@ -60,8 +69,8 @@ public abstract class DatabaseHandler extends RoomDatabase {
 
 //                // Thêm admin user mẫu
                 User admin = new User();
-                admin.setEmail("admin@1.1");
-                admin.setPasswordHash("abc123");
+                admin.setEmail("ad@1.1");
+                admin.setPasswordHash("111111");
                 admin.setRole("admin");
                 database.userDao().insert(admin);
             }).start();

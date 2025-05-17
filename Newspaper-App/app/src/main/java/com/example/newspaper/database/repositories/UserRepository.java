@@ -1,6 +1,7 @@
 package com.example.newspaper.database.repositories;
 
 import android.app.Application;
+import android.util.Log;
 import android.util.Patterns;
 import android.os.AsyncTask;
 
@@ -83,9 +84,17 @@ public class UserRepository {
     // Kiểm tra email tồn tại
     public boolean checkEmailExists(String email) {
         if (email == null || email.trim().isEmpty()) {
+            Log.w("UserRepository", "Invalid email: " + email);
             return false;
         }
-        return userDao.checkEmailExists(email) > 0;
+        try {
+            boolean exists = userDao.checkEmailExists(email) > 0;
+            Log.d("UserRepository", "Checking email: " + email + ", exists: " + exists);
+            return exists;
+        } catch (Exception e) {
+            Log.e("UserRepository", "Check email error: " + e.getMessage());
+            return false;
+        }
     }
 
     // Đăng nhập
@@ -158,6 +167,7 @@ public class UserRepository {
                 }
 
                 userDao.update(user);
+                Log.d("UserRepository", "Updating user ID: " + user.getId() + ", avatarUri: " + user.getAvatarUrl());
                 callback.onSuccess();
             } catch (Exception e) {
                 callback.onError("Lỗi hệ thống: " + e.getMessage());
